@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/LoginScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -53,7 +54,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
+  bool activeFlatButtonColor = true;
+  bool activeRaisedButtonColor = true;
+bool activeFlatButtonName1 = true;
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -65,14 +68,23 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void testFunction() {
-    // click working
+  void changeFlatButtonColor() {
+    setState(() {
+      activeFlatButtonColor = !activeFlatButtonColor;
+    });
+    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
   }
 
-  void raisedFunc() {
-    //On clicking raised button
+  void changeRaisedButtonColor() {
+    setState(() {
+      activeRaisedButtonColor = !activeRaisedButtonColor;
+    });
   }
-
+void changeFlatButtonName1(){
+    setState(() {
+      activeFlatButtonName1 = !activeFlatButtonName1;
+    });
+}
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -117,8 +129,22 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
-            FlatButton(onPressed: testFunction, child: Text('Hello flat button')),
-            RaisedButton(onPressed: raisedFunc, child: Text('raised button'))
+            FlatButton(
+                onPressed: changeFlatButtonColor,
+                child: Text('Hello flat button'),
+                color: activeFlatButtonColor ? Colors.lightBlue : Colors.deepPurple),
+            RaisedButton(
+              onPressed: changeRaisedButtonColor,
+              child: Text('raised button'),
+              color: activeRaisedButtonColor ? Colors.green : Colors.red,
+            ),
+           Text(
+             "Mashal Malik",
+             style: TextStyle(color: activeFlatButtonName1 ?  Colors.green : Colors.amber)),
+      FlatButton(onPressed: changeFlatButtonName1, child: Text ('Press')
+
+           ),
+
           ],
         ),
       ),
